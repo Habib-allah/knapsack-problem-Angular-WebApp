@@ -1,0 +1,78 @@
+<div class="row">
+    <div class="col s12">
+      <div class="card">
+        <div class="card-content white-text">
+          <div class="row">
+            <div class="col s5">
+              <form #itemForm="ngForm" (ngSubmit)="onAdd(itemForm)">
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input type="text" name="name" [(ngModel)]="selectedItem.name" placeholder="Enter Item Name" required>
+                    <label>Name :
+                      <label class="red-text">*</label>
+                    </label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input type="number" name="value"  [(ngModel)]="selectedItem.value" placeholder="In US Dollars" required>
+                    <label>Value :</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input type="number" name="weight"  [(ngModel)]="selectedItem.weight" placeholder="In Kilograms" required>
+                    <label>Weight :</label>
+                  </div>
+                </div>
+            
+                <div class="row">
+                  <div class="input-field col s12">
+                      <div class="input-field col s12">
+                          <input type="number" name="maxWeight"  [(ngModel)]="maxWeight" placeholder="In Kilograms" required>
+                          <label>Max Weight :</label>
+                        </div> 
+                    <button class="btn btn-custom right" type="button" (click)="findMax()">Execute</button>
+                    <button class="btn btn-custom right" type="submit" [disabled]="!itemForm.valid">Submit</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+            
+            <div class="col s7">
+                <table class="responsive-table highlight">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Value</th>
+                        <th>Weight</th>
+                        <th><a class="action-btn" (click)="resetItems()">
+                          <i class="material-icons">delete</i>
+                        </a> </th>
+                      </tr>
+                    </thead>
+                    <tr *ngFor="let item of items">
+                      <td > <span *ngIf="item.chosen" class="new badge" data-badge-caption="chosen"></span> {{item.name}}</td>
+                      <td >{{item.value}}</td>
+                      <td >{{item.weight}}</td>
+                      <td>
+                          <a class="action-btn" (click)="onEdit(item)">
+                            <i class="material-icons">edit</i>
+                          </a>
+                          <a class="action-btn" (click)="onDelete(item)">
+                            <i class="material-icons">delete</i>
+                          </a>
+                        </td>
+                    </tr>
+                  </table>
+
+                  <div class="input-field col s12">
+                      <label >The maximum gain is: {{maxGain}}</label>
+                    </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  </div>
